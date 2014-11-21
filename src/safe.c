@@ -58,7 +58,7 @@ char * safe_strdup(const char *s) {
 		debug(LOG_CRIT, "safe_strdup called with NULL which would have crashed strdup. Bailing out");
 		exit(1);
 	}
-	retval = strdup(s);
+	retval = strdup(s);/*为字符串分配malloc一个单独的空间，如果不用时要用free retval*/
 	if (!retval) {
 		debug(LOG_CRIT, "Failed to duplicate a string: %s.  Bailing out", strerror(errno));
 		exit(1);

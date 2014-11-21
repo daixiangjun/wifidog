@@ -247,7 +247,7 @@ int iptables_fw_init(void)
 	config = config_get_config();/*读取当前的配置*/
 	gw_port = config->gw_port;
 	if (config->external_interface) {
-		ext_interface = safe_strdup(config->external_interface);
+		ext_interface = safe_strdup(config->external_interface);/*给字符串分配空间*/
 	} else {
 		ext_interface = get_ext_iface();
 	}
@@ -259,11 +259,14 @@ int iptables_fw_init(void)
 	}
 	/*
 	 *
-	 * Everything in the MANGLE table
+     * Everything in the MANGLE table :mangle table用于指定如何处理数据包，他能修改tcp头的Qos位
 	 *
 	 */
 
-	/* Create new chains */
+	/* Create new chains 
+    * 在mangle 表中创建了三个链
+    *
+    * */
 	iptables_do_command("-t mangle -N " TABLE_WIFIDOG_TRUSTED);
 	iptables_do_command("-t mangle -N " TABLE_WIFIDOG_OUTGOING);
 	iptables_do_command("-t mangle -N " TABLE_WIFIDOG_INCOMING);
