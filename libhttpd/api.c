@@ -193,7 +193,7 @@ int httpdAddVariable(request *r, const char *name, const char *value)
 		r->variables = newVar;
 	return(0);
 }
-
+/*创建web服务器*/
 httpd *httpdCreate(host, port)
 	char	*host;
 	int	port;
@@ -259,7 +259,7 @@ httpd *httpdCreate(host, port)
  	}
 #endif
 
-	sock = socket(AF_INET, SOCK_STREAM, 0);
+	sock = socket(AF_INET, SOCK_STREAM, 0);//创建流套接字
 	if (sock  < 0)
 	{
 		free(new);
@@ -267,7 +267,7 @@ httpd *httpdCreate(host, port)
 	}
 #	ifdef SO_REUSEADDR
 	opt = 1;
-	setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, (char*)&opt,sizeof(int));
+	setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, (char*)&opt,sizeof(int));/*端口复用*/
 #	endif
 	new->serverSock = sock;
 	bzero(&addr, sizeof(addr));

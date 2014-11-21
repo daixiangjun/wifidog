@@ -233,18 +233,18 @@ iptables_fw_set_authservers(void)
 
 /** Initialize the firewall rules
 */
-	int
-iptables_fw_init(void)
+/*初始化防火墙规则*/	
+int iptables_fw_init(void)
 {
-	const s_config *config;
+	const s_config *config;/*配置文件，包含了配置信息认证协议，等等*/
 	char * ext_interface = NULL;
 	int gw_port = 0;
-	t_trusted_mac *p;
+	t_trusted_mac *p;/*可信的mac地址链表*/
 	int proxy_port;
 	fw_quiet = 0;
 
-	LOCK_CONFIG();
-	config = config_get_config();
+	LOCK_CONFIG();//线程互斥锁
+	config = config_get_config();/*读取当前的配置*/
 	gw_port = config->gw_port;
 	if (config->external_interface) {
 		ext_interface = safe_strdup(config->external_interface);

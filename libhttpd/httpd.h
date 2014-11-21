@@ -164,7 +164,7 @@ typedef struct ip_acl_s{
 typedef struct _httpd_404 {
 	void	(*function)();
 } http404;
-
+/*web服务器的端口、套接字、错误处理、开始时间、目录结构等*/
 typedef struct {
 	int	port,
 		serverSock,
